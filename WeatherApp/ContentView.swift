@@ -9,10 +9,12 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Text("Hello, world!")
-        }
+        Text("Hello World!")
     }
+    
+    // API_KEY = 4dd1d6c50da5c5c1e157745768dff777
+    // COORDINATES = 52.243427, 21.001797
+    // LINK = api.openweathermap.org/data/2.5/forecast?lat=52.243427&lon=21.001797&appid=4dd1d6c50da5c5c1e157745768dff777
 }
 
 #Preview {
