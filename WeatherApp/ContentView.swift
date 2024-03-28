@@ -8,13 +8,33 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var weatherModel = WeatherModel(weather: [WeatherModel.Weather(main: "", icon: "")], main: WeatherModel.Main(temp: 0, tempMin: 0, tempMax: 0, pressure: 0), name: "")
+    
     var body: some View {
-        Text("Hello World!")
+        VStack {
+            Text(weatherModel.weather[0].main)
+            Text(String(format: "%.1f°C", weatherModel.tempInCelsius))
+            Text(weatherModel.name)
+            AsyncImage(url: weatherModel.imageURL) { phase in
+                switch phase {
+                case .success(let image):
+                    image
+                        .resizable()
+                default:
+                    ProgressView()
+                }
+            }
+            .frame(width: 200, height: 200)
+        }
+        .task {
+            do {
+                weatherModel = try await WeatherData().getData()
+            } catch {
+                print(error)
+            }
+        }
     }
     
-    // API_KEY = 4dd1d6c50da5c5c1e157745768dff777
-    // COORDINATES = 52.243427, 21.001797
-    // LINK = api.openweathermap.org/data/2.5/forecast?lat=52.243427&lon=21.001797&appid=4dd1d6c50da5c5c1e157745768dff777
 }
 
 #Preview {
