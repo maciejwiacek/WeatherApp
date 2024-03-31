@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct DailyForecastView: View {
+    let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List(days, id: \.self) { day in
+            Text(day)
+        }
     }
 }
 

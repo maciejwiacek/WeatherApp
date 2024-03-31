@@ -8,44 +8,49 @@
 import SwiftUI
 
 struct WeatherView: View {
+    var isDay = true
+    
     var body: some View {
-        VStack {
-            Text("Saturday, 30 March 2024")
-                .foregroundStyle(.secondary)
-            
-            VStack {
-                Text("Warsaw".uppercased())
-                    .font(.system(size: 40, weight: .black))
-                    .tracking(5)
-                
-                Text("Partly Cloudy".uppercased())
-                    .font(.system(size: 25, weight: .light))
-                    .tracking(3)
-            }
-            
-            VStack {
-                Image(systemName: "cloud.moon")
-                    .font(.system(size: 80, weight: .medium))
-                
-                Text("16°C")
-                    .font(.system(size: 80, weight: .medium))
-            }
-            
-            HStack(spacing: 25) {
-                VStack(spacing: 10) {
-                    Text("MIN")
-                        .foregroundStyle(.secondary)
-                    Text("9°C")
+        NavigationStack {
+            ZStack {
+                if isDay {
+                    Color.backgroundDay
+                        .ignoresSafeArea()
+                } else {
+                    Color.backgroundNight
+                        .ignoresSafeArea()
                 }
-                
-                RoundedRectangle(cornerRadius: 50)
-                    .foregroundStyle(.secondary)
-                    .frame(width: 2, height: 40)
-                
-                VStack(spacing: 10) {
-                    Text("MAX")
-                        .foregroundStyle(.secondary)
-                    Text("22°C")
+                ScrollView {
+                    VStack(spacing: 25) {
+                        VStack {
+                            Text("Warsaw".uppercased())
+                                .font(.system(size: 30, weight: .black))
+                                .tracking(5)
+                            
+                            Text("Partly Cloudy".capitalized)
+                                .font(.system(size: 20, weight: .light))
+                                .tracking(3)
+                        }
+                        .padding(.top)
+                        
+                        Image("02d")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 150)
+                        
+                        HStack(alignment: .top, spacing: 3) {
+                            Text("16")
+                                .font(.system(size: 60, weight: .medium))
+                            Text("°")
+                                .font(.system(size: 45))
+                        }
+                        
+                        
+                        
+                        HourlyForecastView()
+                        
+                        DailyForecastView()
+                    }
                 }
             }
         }
@@ -54,4 +59,5 @@ struct WeatherView: View {
 
 #Preview {
     WeatherView()
+        .preferredColorScheme(.dark)
 }
