@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct HourlyForecastView: View {
+    var isDay = true
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("24-HOUR FORECAST")
                 .padding([.top, .leading])
                 .font(.system(size: 15))
-//                .foregroundStyle(.secondary)
-                .foregroundStyle(Color(hex: "#4F7B94"))
+                .foregroundStyle(Color(hex: "#6A6D6F"))
             
             Divider()
                 .padding(.horizontal)
@@ -26,7 +27,7 @@ struct HourlyForecastView: View {
                             Text("\(hour)PM")
                                 .font(.system(size: 15).bold())
                             
-                            Image("02n")
+                            Image("02d")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 40)
@@ -40,10 +41,9 @@ struct HourlyForecastView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: 170)
-        .background(Color(hex: "#071F2C"))
+        .background(Color(hex: isDay ? "#071F2C" : "#141617"))
         .clipShape(.rect(cornerRadius: 30))
         .padding(.horizontal, 25)
-        .shadow(radius: 2, x: 4, y: 4)
     }
 }
 

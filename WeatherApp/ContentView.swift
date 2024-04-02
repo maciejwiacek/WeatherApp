@@ -8,22 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
-    init() {
-        UIPageControl.appearance().currentPageIndicatorTintColor = .black
-        UIPageControl.appearance().pageIndicatorTintColor = UIColor.black.withAlphaComponent(0.3)
-    }
-    
     var body: some View {
-        TabView {
-            Text("Test")
-                .tabItem {
-                    Image(systemName: "location.fill")
-                }
+        ZStack {
+            Color.backgroundDay
+                .ignoresSafeArea()
             
-            Text("Test")
+            TabView {
+                WeatherView()
+                    .tabItem {
+                        Image(systemName: "location.fill")
+                    }
+                
+                WeatherView()
+            }
+            .tabViewStyle(.page)
+            .padding(.top, 60)
         }
-        .tabViewStyle(.page)
-        .indexViewStyle(.page)
+        .ignoresSafeArea()
+        .preferredColorScheme(.dark)
 //        .task {
 //            do {
 //                weatherModel = try await WeatherData().getData()
@@ -32,7 +34,6 @@ struct ContentView: View {
 //            }
 //        }
     }
-    
 }
 
 #Preview {

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WeatherView: View {
     var isDay = true
+    @State private var city = ""
     
     var body: some View {
         NavigationStack {
@@ -21,6 +22,14 @@ struct WeatherView: View {
                         .ignoresSafeArea()
                 }
                 ScrollView {
+                    TextField("Search", text: $city)
+                        .padding()
+                        .frame(width: .infinity, height: 40)
+                        .background(Color(hex: isDay ? "#071F2C" : "#141617"))
+                        .clipShape(.rect(cornerRadius: 30))
+                        .padding(.horizontal, 25)
+                        .padding(.bottom)
+                    
                     VStack(spacing: 25) {
                         VStack {
                             Text("Warsaw".uppercased())
@@ -45,7 +54,7 @@ struct WeatherView: View {
                                 .font(.system(size: 45))
                         }
                         
-                        
+                        WeatherDetailsView()
                         
                         HourlyForecastView()
                         
